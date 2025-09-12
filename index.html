@@ -1,201 +1,337 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8" />
-  <title>3時間で公開まで！ホームページ制作超入門講座 | イベント紹介</title>
+  <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="WordPressの基本から公開まで3時間で体験できる入門講座。日時・会場・申し込みリンクを掲載しています。" />
+  <title>Kashin Cafe | おしゃれで居心地のいいカフェ</title>
+  <meta name="description" content="写真が映える、おしゃれで居心地のいいカフェ。季節のコーヒーと手作りスイーツ、軽食をご用意しています。" />
+  <meta name="theme-color" content="#0f172a" />
+  <meta property="og:title" content="Kashin Cafe" />
+  <meta property="og:description" content="写真が映える、おしゃれで居心地のいいカフェ" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop" />
+  <link rel="icon" href="https://fav.farm/☕" />
+  <!-- TailwindCSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Noto Serif JP"', 'serif'],
+            body: ['"Noto Sans JP"', 'system-ui', 'sans-serif']
+          },
+          colors: {
+            brand: {
+              50:'#f4f6f5',100:'#e7ebe9',200:'#d0d7d3',300:'#aebbb5',400:'#7d948b',500:'#5f766d',600:'#4b5d57',700:'#3f4e49',800:'#34403c',900:'#29322f'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;600;700&family=Noto+Serif+JP:wght@400;600;700&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#0f172a; --card:#111827; --muted:#94a3b8; --fg:#e5e7eb; --accent:#38bdf8; --accent-2:#22c55e;
-      --max:960px;
-    }
-    *{box-sizing:border-box}
-    body{margin:0;background:linear-gradient(180deg,#0b1220,#0f172a 40%,#0b1220);color:var(--fg);font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,Helvetica,sans-serif;line-height:1.7}
-    header{padding:48px 20px 24px;border-bottom:1px solid #1f2937;background:radial-gradient(1000px 400px at 80% -100px,rgba(56,189,248,.25),transparent 50%)}
-    .wrap{max-width:var(--max);margin:auto}
-    .kicker{color:var(--accent);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
-    h1{margin:.25em 0 .4em;font-size:clamp(26px,4.5vw,40px);line-height:1.2}
-    .lead{color:var(--muted);max-width:70ch}
-    .grid{display:grid;gap:16px}
-    @media(min-width:860px){.grid{grid-template-columns:1.2fr .8fr}}
-    .card{background:linear-gradient(180deg,#0b1323,#0d1528);border:1px solid #1f2a44;border-radius:16px;padding:20px}
-    .label{display:inline-block;font-size:12px;padding:2px 8px;border-radius:999px;background:#0b2a38;color:#7dd3fc;border:1px solid #1f3646;margin-right:6px}
-    .when{font-size:20px;font-weight:700;margin:.2em 0}
-    ul{margin:0;padding-left:1.2em}
-    .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}
-    .btn{
-      appearance:none;border:none;cursor:pointer;text-decoration:none;
-      padding:12px 16px;border-radius:12px;font-weight:700;display:inline-flex;align-items:center;gap:8px;
-      background:rgba(56,189,248,.1);color:#e0f2fe;border:1px solid rgba(56,189,248,.35)
-    }
-    .btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(56,189,248,.15)}
-    .btn.alt{background:rgba(34,197,94,.1);color:#dcfce7;border-color:rgba(34,197,94,.35)}
-    .btn.ghost{background:transparent;color:#cbd5e1;border-color:#334155}
-    .sec{padding:28px 20px}
-    h2{font-size:22px;margin:0 0 12px}
-    .list{display:grid;gap:10px}
-    .loc{display:flex;gap:10px;align-items:flex-start}
-    .dot{width:10px;height:10px;border-radius:50%;margin-top:9px;background:linear-gradient(180deg,#7dd3fc,#22d3ee)}
-    footer{padding:24px 20px;color:#94a3b8;border-top:1px solid #1f2937}
-    .note{font-size:13px;color:#9ca3af}
-    a{color:#7dd3fc}
-    .badges{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-    .badge{font-size:12px;padding:4px 8px;border:1px solid #334155;border-radius:999px;color:#cbd5e1;background:#0b1220}
-    .price{font-size:18px;font-weight:800}
+    /* ちょい足し演出 */
+    .glass { backdrop-filter: blur(10px); background: rgba(15,23,42,.45); }
+    .shadow-soft { box-shadow: 0 10px 30px rgba(0,0,0,.08); }
+    .parallax { background-attachment: fixed; }
+    @media (max-width: 768px) { .parallax { background-attachment: scroll; } }
+    html { scroll-behavior: smooth; }
   </style>
+  <script>
+    // スクロールでヘッダー縮小
+    document.addEventListener('DOMContentLoaded', () => {
+      const header = document.querySelector('#siteHeader');
+      window.addEventListener('scroll', () => {
+        header.classList.toggle('backdrop-blur', window.scrollY > 10);
+        header.classList.toggle('bg-black/70', window.scrollY > 10);
+        header.classList.toggle('shadow', window.scrollY > 10);
+      });
+    });
+  </script>
+  <script>
+    // シンプルなライトボックス
+    function openLightbox(src) {
+      const modal = document.getElementById('lightbox');
+      const img = document.getElementById('lightboxImg');
+      img.src = src;
+      modal.classList.remove('hidden');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+    }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CafeOrCoffeeShop",
+    "name": "Kashin Cafe",
+    "image": "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?q=80&w=1600&auto=format&fit=crop",
+    "servesCuisine": ["Coffee", "Sweets", "Light meals"],
+    "priceRange": "¥¥",
+    "address": {"@type": "PostalAddress", "addressCountry": "JP"},
+    "openingHours": ["Mo-Su 09:00-18:00"],
+    "url": "https://example.com",
+    "telephone": "+81-00-0000-0000"
+  }
+  </script>
 </head>
-<body>
-  <header>
-    <div class="wrap">
-      <div class="kicker">イベント紹介</div>
-      <h1>3時間で公開まで！ホームページ制作超入門講座</h1>
-      <p class="lead">
-        「最短で形にして、公開まで」——WordPressの基本操作とページ作成、テーマ選び、安心して更新できる管理方法を<span class="nowrap">3時間</span>で体験。
-        初めての方にもやさしい超入門です。
-      </p>
-      <div class="badges">
-        <span class="badge">初心者歓迎</span>
-        <span class="badge">WordPress</span>
-        <span class="badge">実践3時間</span>
+<body class="bg-brand-50 text-slate-800 font-body">
+  <!-- Header -->
+  <header id="siteHeader" class="fixed top-0 inset-x-0 z-50 transition-all">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+<a href="#top" class="font-display text-xl tracking-wide text-white">Kashin Cafe</a>
+<nav class="hidden md:flex gap-8 text-sm font-medium text-white">
+  <a href="#menu" class="hover:text-brand-200">メニュー</a>
+  <a href="#manager" class="hover:text-brand-200">店長紹介</a>
+  <a href="#gallery" class="hover:text-brand-200">ギャラリー</a>
+  <a href="#access" class="hover:text-brand-200">アクセス</a>
+  <a href="#contact" class="hover:text-brand-200">お問い合わせ</a>
+</nav>
+
+        <a href="#reservation" class="hidden md:inline-block rounded-full bg-yellow-900 px-4 py-2 text-white hover:bg-yellow-800">ご予約</a>
+
+        <button id="menuBtn" class="md:hidden p-2" aria-label="Open menu" onclick="document.getElementById('mobileNav').classList.toggle('hidden')">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+        </button>
       </div>
+    </div>
+<div id="mobileNav" class="md:hidden hidden bg-white/90 backdrop-blur border-t border-slate-200">
+  <div class="mx-auto max-w-7xl px-4 py-4 flex flex-col gap-4 text-white">
+    <a href="#menu" onclick="this.closest('#mobileNav').classList.add('hidden')">メニュー</a>
+    <a href="#manager" onclick="this.closest('#mobileNav').classList.add('hidden')">店長紹介</a>
+    <a href="#gallery" onclick="this.closest('#mobileNav').classList.add('hidden')">ギャラリー</a>
+    <a href="#access" onclick="this.closest('#mobileNav').classList.add('hidden')">アクセス</a>
+    <a href="#contact" onclick="this.closest('#mobileNav').classList.add('hidden')">お問い合わせ</a>
+    <a href="#reservation" class="rounded-md bg-brand-800 px-4 py-2 text-center text-white">ご予約</a>
+  </div>
+</div>
+
     </div>
   </header>
 
-  <section class="sec">
-    <div class="wrap grid">
-      <!-- 左：概要 -->
-      <div class="card">
-        <div class="label">開催日時</div>
-        <div class="when">2025年9月6日（土） 13:00〜16:00（3時間）</div>
-
-        <div style="margin-top:14px">
-          <div class="label">会場（全国同時開催）</div>
-          <div class="list" style="margin-top:8px">
-            <div class="loc"><div class="dot"></div><div>江別教室（北海道江別市大麻東町13-6）</div></div>
-            <div class="loc"><div class="dot"></div><div>高松教室（香川県高松市常磐町1丁目3-1 瓦町FLAG 10F）</div></div>
-            <div class="loc"><div class="dot"></div><div>今治教室（今治市常盤町4-8-18 しまなみイノベーションビル2階）</div></div>
-            <div class="loc"><div class="dot"></div><div>八代教室（熊本県八代市本町1丁目10-43）</div></div>
-            <div class="loc"><div class="dot"></div><div>天草教室（熊本県天草市中央新町15-7 天草宝島国際交流会館ポルト2階 展示ホール）</div></div>
-            <div class="loc"><div class="dot"></div><div>コザ教室（沖縄県沖縄市中央1-14-3 1F）</div></div>
-          </div>
-        </div>
-
-        <div style="margin-top:16px">
-          <div class="label">持ち物</div>
-          <div>Wi-Fi接続可能なノートパソコン</div>
-        </div>
-
-        <div style="margin-top:16px">
-          <div class="label">受講料金</div>
-          <div class="price">¥8,800（税込）</div>
-        </div>
-
-        <div class="btns" style="margin-top:18px">
-          <a href="https://forms.gle/zrs2iWYEPonGFaZp6" class="btn" target="_blank" rel="noopener">現地で申し込む</a>
-          <a href="https://store.sunabaco.com/products/wp-beginner" class="btn alt" target="_blank" rel="noopener">オンラインで申し込む</a>
-          <button id="icsBtn" class="btn ghost" type="button" title="iPhone/Google/Outlookで使える .ics を作成">カレンダーに追加（.ics）</button>
-          <a href="https://sunabaco.com/event/wp-beginner/" class="btn ghost" target="_blank" rel="noopener">公式ページを見る</a>
-        </div>
-
-        <p class="note" style="margin-top:10px">
-          ※ 掲載内容は公式ページの情報に基づいています。最新情報は公式をご確認ください。
-        </p>
+  <!-- Hero -->
+  <section id="top" class="relative h-[90vh] flex items-center justify-center">
+    <div class="absolute inset-0 parallax bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?q=80&w=2000&auto=format&fit=crop');"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-black/50 to-black/20"></div>
+    <div class="relative z-10 max-w-3xl mx-auto text-center px-6">
+      <p class="text-white/80 tracking-widest text-xs uppercase">Coffee • Sweets • Plants</p>
+      <h1 class="mt-3 font-display text-4xl sm:text-5xl md:text-6xl text-white leading-tight">
+        日常に、上質なひととき。
+      </h1>
+      <p class="mt-4 text-white/90">季節のブレンドと、手作りスイーツ。花屋併設のカフェで、五感でくつろぐ時間を。</p>
+      <div class="mt-8 flex items-center justify-center gap-3">
+        <a href="#menu" class="rounded-full bg-white/90 text-brand-900 px-5 py-3 hover:bg-white">メニューを見る</a>
+        <a href="#reservation" class="rounded-full glass text-white px-5 py-3 hover:bg-white/20 border border-white/20">予約する</a>
       </div>
-
-      <!-- 右：学べること/おすすめ -->
-      <aside class="card">
-        <h2>講座で学べること</h2>
-        <ul>
-          <li>WordPressの基本操作とページ作成の流れ</li>
-          <li>失敗しないテーマ選びとカスタマイズのコツ</li>
-          <li>安心して更新できる簡単な管理方法</li>
-        </ul>
-
-        <h2 style="margin-top:18px">こんな方におすすめ</h2>
-        <ul>
-          <li>ホームページを作ってみたいが、何から始めれば良いか分からない</li>
-          <li>WordPressを超基礎から学びたい</li>
-          <li>デザイン変更や更新が怖くて触れられていない</li>
-          <li>趣味や仕事で自分のサイトを持ちたい</li>
-        </ul>
-      </aside>
     </div>
   </section>
 
-  <footer>
-    <div class="wrap">
-      <div>© 2025 Event Intro Page</div>
+  <!-- Features / Concept -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 rounded-2xl shadow-soft border bg-gradient-to-b from-white to-slate-50">
+          <h3 class="font-display text-xl">季節のブレンド</h3>
+          <p class="mt-2 text-slate-600">香り・甘み・後味のバランスを大切にした月替わりのブレンドをご用意。</p>
+        </div>
+        <div class="p-6 rounded-2xl shadow-soft border bg-gradient-to-b from-white to-slate-50">
+          <h3 class="font-display text-xl">手作りスイーツ</h3>
+          <p class="mt-2 text-slate-600">定番チーズケーキに加え、旬の果物を使った限定タルトも人気です。</p>
+        </div>
+        <div class="p-6 rounded-2xl shadow-soft border bg-gradient-to-b from-white to-slate-50">
+          <h3 class="font-display text-xl">花のある空間</h3>
+          <p class="mt-2 text-slate-600">生花店併設。季節の花で彩られた心地よい店内でお過ごしください。</p>
+        </div>
+      </div>
     </div>
+  </section>
+
+  <!-- Menu -->
+  <section id="menu" class="py-20 bg-brand-900 text-brand-50">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-end justify-between gap-4">
+        <div>
+          <h2 class="font-display text-3xl">メニュー</h2>
+          <p class="text-brand-200 mt-2">※価格は税込・一部数量限定</p>
+        </div>
+        <a href="#contact" class="hidden md:inline-block px-4 py-2 rounded-md bg-brand-700 hover:bg-brand-600 text-white">テイクアウトのご予約</a>
+      </div>
+      <div class="mt-8 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Item -->
+        <article class="rounded-2xl overflow-hidden bg-brand-800/60 border border-white/10">
+          <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1200&auto=format&fit=crop" alt="季節のブレンド" class="h-48 w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="font-display text-xl">季節のブレンド</h3>
+            <p class="text-brand-200 mt-1">香り高く、やさしい口当たり。</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-white font-semibold">¥520</span>
+              <span class="text-xs text-brand-300">Hot / Iced</span>
+            </div>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden bg-brand-800/60 border border-white/10">
+          <img src="https://images.unsplash.com/photo-1523986371872-9d3ba2e2f642?q=80&w=1200&auto=format&fit=crop" alt="チーズケーキ" class="h-48 w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="font-display text-xl">ベイクドチーズケーキ</h3>
+            <p class="text-brand-200 mt-1">しっとり濃厚、コーヒーとの相性抜群。</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-white font-semibold">¥620</span>
+              <span class="text-xs text-brand-300">数量限定</span>
+            </div>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden bg-brand-800/60 border border-white/10">
+          <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?q=80&w=1200&auto=format&fit=crop" alt="サンド" class="h-48 w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="font-display text-xl">季節野菜のサンド</h3>
+            <p class="text-brand-200 mt-1">自家製ソースで仕上げた食事系。</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-white font-semibold">¥780</span>
+              <span class="text-xs text-brand-300">テイクアウトOK</span>
+            </div>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden bg-brand-800/60 border border-white/10">
+          <img src="https://images.unsplash.com/photo-1494314671902-399b18174975?q=80&w=1200&auto=format&fit=crop" alt="カフェラテ" class="h-48 w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="font-display text-xl">カフェラテ</h3>
+            <p class="text-brand-200 mt-1">まろやかな泡と深いコク。</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-white font-semibold">¥580</span>
+              <span class="text-xs text-brand-300">Oat Milk +¥100</span>
+            </div>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden bg-brand-800/60 border border-white/10">
+          <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1200&auto=format&fit=crop" alt="レモンタルト" class="h-48 w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="font-display text-xl">レモンタルト</h3>
+            <p class="text-brand-200 mt-1">爽やかな酸味と香ばしい生地。</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-white font-semibold">¥650</span>
+              <span class="text-xs text-brand-300">季節限定</span>
+            </div>
+          </div>
+        </article>
+        <article class="rounded-2xl overflow-hidden bg-brand-800/60 border border-white/10">
+          <img src="https://images.unsplash.com/photo-1523906630133-f6934a1ab3e1?q=80&w=1200&auto=format&fit=crop" alt="アフォガート" class="h-48 w-full object-cover"/>
+          <div class="p-5">
+            <h3 class="font-display text-xl">アフォガート</h3>
+            <p class="text-brand-200 mt-1">濃いめのエスプレッソ×バニラ。</p>
+            <div class="mt-3 flex items-center justify-between">
+              <span class="text-white font-semibold">¥600</span>
+              <span class="text-xs text-brand-300">午後から</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Manager -->
+  <section id="manager" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10 items-center">
+      <img src="https://images.unsplash.com/photo-1542736667-069246bdbc74?q=80&w=1200&auto=format&fit=crop" alt="店長写真" class="rounded-2xl shadow-soft object-cover w-full h-80"/>
+      <div>
+        <h2 class="font-display text-3xl">店長紹介</h2>
+        <p class="mt-4 leading-relaxed text-slate-600">花とコーヒーを愛する店長・<strong>Yuki</strong>です。季節の花に囲まれた空間で、香り高い一杯と手作りのスイーツを楽しんでいただけるよう、日々丁寧に仕込みをしています。おすすめの飲み方など、気軽にお声がけください。</p>
+        <ul class="mt-6 space-y-2 text-slate-600">
+          <li>・スペシャルティコーヒー資格保有</li>
+          <li>・得意メニュー：チーズケーキ、レモンタルト</li>
+          <li>・趣味：サーフィン、ボルダリング</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section id="gallery" class="py-20 bg-gradient-to-b from-brand-50 to-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <h2 class="font-display text-3xl">ギャラリー</h2>
+      <p class="text-slate-600 mt-2">写真をタップで拡大表示できます。</p>
+      <div class="mt-6 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <img class="rounded-xl cursor-zoom-in aspect-[4/3] object-cover" onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?q=80&w=800&auto=format&fit=crop" alt="coffee"/>
+        <img class="rounded-xl cursor-zoom-in aspect-[4/3] object-cover" onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?q=80&w=800&auto=format&fit=crop" alt="dessert"/>
+        <img class="rounded-xl cursor-zoom-in aspect-[4/3] object-cover" onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1511920170033-f8396924c348?q=80&w=800&auto=format&fit=crop" alt="latte"/>
+        <img class="rounded-xl cursor-zoom-in aspect-[4/3] object-cover" onclick="openLightbox(this.src)" src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=800&auto=format&fit=crop" alt="interior"/>
+      </div>
+    </div>
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="hidden fixed inset-0 bg-black/80 z-50 grid place-items-center p-6" onclick="closeLightbox()">
+      <img id="lightboxImg" class="max-h-[85vh] rounded-xl shadow-2xl" alt="lightbox" src=""/>
+    </div>
+  </section>
+
+  <!-- Reservation CTA -->
+  <section id="reservation" class="py-16 relative">
+    <div class="absolute inset-0 -z-10" style="background: radial-gradient(60% 60% at 50% 40%, #e7ebe9 0, transparent 60%)"></div>
+    <div class="max-w-5xl mx-auto px-6 text-center">
+      <h2 class="font-display text-3xl">ご予約・お取り置き</h2>
+      <p class="mt-3 text-slate-600">席のご予約、ケーキの取り置き、花束の同時注文も承ります。</p>
+      <a href="#contact" class="inline-block mt-6 rounded-full bg-brand-900 text-white px-6 py-3 hover:bg-brand-800">お問い合わせへ</a>
+    </div>
+  </section>
+
+  <!-- Access -->
+  <section id="access" class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-10 items-start">
+      <div>
+        <h2 class="font-display text-3xl">アクセス</h2>
+        <p class="mt-3 text-slate-600">〒000-0000 愛媛県今治市〇〇町0-0-0（仮）</p>
+        <dl class="mt-6 grid grid-cols-[auto,1fr] gap-x-4 gap-y-2 text-slate-700">
+          <dt class="font-medium">営業時間</dt><dd>9:00 - 18:00（L.O. 17:30）</dd>
+          <dt class="font-medium">定休日</dt><dd>火曜</dd>
+          <dt class="font-medium">電話</dt><dd>00-0000-0000</dd>
+          <dt class="font-medium">駐車場</dt><dd>3台</dd>
+          <dt class="font-medium">Wi‑Fi</dt><dd>Free</dd>
+        </dl>
+        <div class="mt-6 flex gap-3">
+          <a class="inline-flex items-center gap-2 px-4 py-2 rounded-md border hover:bg-slate-50" href="#">Instagram</a>
+          <a class="inline-flex items-center gap-2 px-4 py-2 rounded-md border hover:bg-slate-50" href="#">LINE公式</a>
+        </div>
+      </div>
+      <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-soft border">
+        <iframe class="w-full h-full" src="https://maps.google.com/maps?q=Imabari%20Ehime&t=&z=12&ie=UTF8&iwloc=&output=embed" loading="lazy" title="Google Map"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section id="contact" class="py-20 bg-brand-900 text-brand-50">
+    <div class="max-w-5xl mx-auto px-6">
+      <h2 class="font-display text-3xl">お問い合わせ</h2>
+      <p class="text-brand-200 mt-2">ご予約・お取り置き・ケータリングのご相談はこちらから</p>
+      <form class="mt-6 grid md:grid-cols-2 gap-6" onsubmit="event.preventDefault(); alert('送信しました。（フォーム送信先は後でGAS等に接続してください）'); this.reset();">
+        <div>
+          <label class="block text-sm text-brand-200">お名前</label>
+          <input required class="mt-1 w-full rounded-md bg-white/10 border-white/20 px-3 py-2 outline-none focus:ring-2 focus:ring-white/40" type="text" placeholder="花心 由紀" />
+        </div>
+        <div>
+          <label class="block text-sm text-brand-200">メールアドレス</label>
+          <input required class="mt-1 w-full rounded-md bg-white/10 border-white/20 px-3 py-2 outline-none focus:ring-2 focus:ring-white/40" type="email" placeholder="you@example.com" />
+        </div>
+        <div class="md:col-span-2">
+          <label class="block text-sm text-brand-200">内容</label>
+          <textarea required class="mt-1 w-full rounded-md bg-white/10 border-white/20 px-3 py-2 h-32 outline-none focus:ring-2 focus:ring-white/40" placeholder="ご予約日時 / 人数 / ご希望メニュー など"></textarea>
+        </div>
+        <div class="md:col-span-2 flex items-center justify-between">
+          <p class="text-xs text-brand-300">このフォームはデモです。実運用はGoogleフォーム/GASへ接続可能。</p>
+          <button class="rounded-full bg-white/90 text-brand-900 px-6 py-3 hover:bg-white">送信</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-10 text-center text-slate-600 bg-white">
+    <p class="text-sm">© <span id="year"></span> Kashin Cafe. All rights reserved.</p>
   </footer>
 
-  <!-- JSON-LD（検索エンジン向け構造化データ） -->
-  <script type="application/ld+json">
-  {
-    "@context":"https://schema.org",
-    "@type":"Event",
-    "name":"3時間で公開まで！ホームページ制作超入門講座",
-    "startDate":"2025-09-06T13:00:00+09:00",
-    "endDate":"2025-09-06T16:00:00+09:00",
-    "eventAttendanceMode":"https://schema.org/OfflineEventAttendanceMode",
-    "eventStatus":"https://schema.org/EventScheduled",
-    "description":"WordPressの基本操作とページ作成、テーマ選び、更新管理を3時間で体験する超入門講座。",
-    "location":[
-      {"@type":"Place","name":"江別教室","address":"北海道江別市大麻東町13-6"},
-      {"@type":"Place","name":"高松教室","address":"香川県高松市常磐町1丁目3-1 瓦町FLAG 10F"},
-      {"@type":"Place","name":"今治教室","address":"今治市常盤町4-8-18 しまなみイノベーションビル2階"},
-      {"@type":"Place","name":"八代教室","address":"熊本県八代市本町1丁目10-43"},
-      {"@type":"Place","name":"天草教室","address":"熊本県天草市中央新町15-7 天草宝島国際交流会館ポルト2階 展示ホール"},
-      {"@type":"Place","name":"コザ教室","address":"沖縄県沖縄市中央1-14-3 1F"}
-    ],
-    "offers":{
-      "@type":"Offer",
-      "price":"8800",
-      "priceCurrency":"JPY",
-      "url":"https://store.sunabaco.com/products/wp-beginner",
-      "availability":"https://schema.org/InStock"
-    },
-    "organizer":{
-      "@type":"Organization",
-      "name":"SUNABACO",
-      "url":"https://sunabaco.com/"
-    }
-  }
-  </script>
-
-  <!-- .ics 自動生成（ローカルのみでOK） -->
   <script>
-    document.getElementById('icsBtn').addEventListener('click', () => {
-      // JST（+0900）で 2025-09-06 13:00-16:00
-      const dtStart = '20250906T130000';
-      const dtEnd   = '20250906T160000';
-      const title   = '3時間で公開まで！ホームページ制作超入門講座';
-      const desc    = 'WordPressの基本から公開まで3時間で体験。公式: https://sunabaco.com/event/wp-beginner/';
-      const loc     = '全国同時開催（江別/高松/今治/八代/天草/コザ）';
-
-      const ics =
-`BEGIN:VCALENDAR
-VERSION:2.0
-PRODID:-//EventIntro//JP
-CALSCALE:GREGORIAN
-BEGIN:VEVENT
-UID:${crypto.randomUUID()}
-DTSTAMP:${new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d{3}Z$/,'Z')}
-DTSTART;TZID=Asia/Tokyo:${dtStart}
-DTEND;TZID=Asia/Tokyo:${dtEnd}
-SUMMARY:${title}
-DESCRIPTION:${desc}
-LOCATION:${loc}
-END:VEVENT
-END:VCALENDAR`;
-
-      const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
-      const url = URL.createObjectURL(blob);
-      const a = document.createElement('a');
-      a.href = url; a.download = 'wp-beginner.ics';
-      document.body.appendChild(a); a.click();
-      URL.revokeObjectURL(url); a.remove();
-    });
+    document.getElementById('year').textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
